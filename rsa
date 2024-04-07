@@ -1,0 +1,46 @@
+#!/usr/bin/python3
+from sys import argv
+import math
+
+
+
+def is_prime(num):
+
+    x = 3
+    if num % 2 == 0:
+        return False
+    while x * x <= num:
+        if num % x == 0:
+            return False
+        x += 2
+    return True
+
+
+def factory(num):
+
+    if num % 2 == 0:
+        x = 2
+        print("{}={}*{}".format(num, int(num/x), x))
+    else:
+        sq = math.sqrt(num)
+        if sq % 1 == 0:
+            print("{}={}*{}".format(num, sq, int(num/sq)))
+            return
+        sq = int(sq) + 1
+        for x in range(3, sq, +2):
+            if num % x == 0:
+                if is_prime(x):
+                    print("{}={}*{}".format(num, int(num/x), x))
+                    return
+
+
+def factors(filename):
+
+    with open(filename, encoding="utf-8") as my_file:
+        for x in my_file.readlines():
+            z = int(x)
+            result = factory(z)
+
+
+if __name__ == "__main__":
+    factors(argv[1])
