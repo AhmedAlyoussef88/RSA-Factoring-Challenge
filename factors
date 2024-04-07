@@ -1,7 +1,6 @@
 #!/usr/bin/python3
+from sys import argv
 import math
-import sys
-
 
 
 def factors(num):
