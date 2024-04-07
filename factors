@@ -1,0 +1,33 @@
+#!/usr/bin/python3
+import sys
+import math
+
+def factors(num):
+    if num % 2 == 0:
+        factor = 2
+    else:
+        sqrt_num = int(math.sqrt(num)) + 1
+        for i in range(3, sqrt_num, 2):
+            if num % i == 0:
+                factor = i
+                break
+            if num % (sqrt_num + i) == 0:
+                factor = sqrt_num + i
+                break
+            if num % (sqrt_num - i) == 0:
+                factor = sqrt_num - i
+                break
+    return factor, num
+
+def factorize_numbers(filename):
+    with open(filename, encoding="utf-8") as file:
+        for line in file:
+            number = int(line.strip())
+            factor_1, factor_2 = factors(number)
+            print(f"{number} = {factor_1} * {factor_2}")
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python3 script.py <filename>")
+        sys.exit(1)
+    factorize_numbers(sys.argv[1])
